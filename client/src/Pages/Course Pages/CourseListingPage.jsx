@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { CurrentMode } from "../../../currentMode"
 import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router";
+
+import SampleSkillImage from "../../../public/Images/sample skill image.jpg"
 
 export default function CourseListingPage() {
 
@@ -33,8 +36,11 @@ export default function CourseListingPage() {
 
   return (
 
-    <div className="">
-      <div>
+    <div className="mx-20 my-10">
+      <div className="flex justify-center items-center font-bold text-xl mb-4">
+        Explore New Courses here
+      </div>
+      <div className="flex gap-4">
         {courses.map(item => (
           <Course course={item} key={item._id} />
         ))}
@@ -45,10 +51,29 @@ export default function CourseListingPage() {
 
 
 function Course({ course }) {
+  const Navigate = useNavigate();
+
+  function handleCourse() {
+    Navigate('/course/' + course.name, { state: { course } })
+  }
 
   return (
-    <div>
-      this is a {course.name}
+    <div className="w-[20vw] text-lg border-2 border-slate-200 rounded py-2 px-4 cursor-pointer" onClick={handleCourse}>
+      <div>
+        <img src={SampleSkillImage} />
+      </div>
+      <div className="text-lg font-bold ">
+        {course.name}
+      </div>
+      <div className="text-base">
+        {course.instructor.name}
+      </div>
+      <div className="font-semibold">
+        ₹ {course.price}
+      </div>
+      <div className="text-sm bg-purple-400 rounded text-white w-fit px-2 py-[4px] ">
+        {course.topics}
+      </div>
     </div>
   )
 }

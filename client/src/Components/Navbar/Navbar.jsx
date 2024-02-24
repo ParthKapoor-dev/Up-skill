@@ -12,11 +12,15 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between px-10 py-4 border-b-[0.5px] border-b-slate-300" >
-      <div className="">
-        <Link to="/explore/courses" className="cursor-pointer text-2xl">
+    <nav className="flex items-center justify-between px-8 py-4 border-b-[0.5px] border-b-slate-300" >
+      <div className="flex justify-center items-center">
+        <Link to="/explore/courses" className="cursor-pointer text-2xl text-purple-600 font-bold">
           UpSkill
         </Link>
+        {user && (
+          <input type="text" className='rounded-3xl px-6 py-2 w-[25vw] border-2 border-grey-200 text-lg ml-4' />
+
+        )}
       </div>
 
       <div className="flex gap-4">

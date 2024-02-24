@@ -52,7 +52,7 @@ export default function LoginPage() {
         Log In to Existing Account
       </div>
 
-      <form className="flex flex-col gap-[4px] justify-center text-lg" onSubmit={handleSubmit}>
+      <form className="input-styles flex flex-col gap-[4px] justify-center text-lg" onSubmit={handleSubmit}>
 
 
         <label htmlFor="signupPage-emial">Email</label>

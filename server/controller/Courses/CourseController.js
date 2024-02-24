@@ -7,12 +7,9 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
   });
 
-async function AddCourse(req, resp) {
-    console.log("hello");
-    console.log(req.body);
 
-    // console.log(req.body);
-    // console.log(req.file);
+async function AddCourse(req, resp) {
+    console.log(req.body);
     const { name, instructor, subject, price, starttime, endtime, topics } = req.body;
     try {
             const course = await Course.create({ name: name, instructor: instructor, subject: subject, price: price, starttime: starttime, endtime: endtime, topics: topics });
@@ -49,6 +46,18 @@ async function DisplayCourse(req, resp) {
 
 }
 
+async function getUserCourses(req, res) {
+    const _id = req.user._id;
+
+    try {
+        const courses = await Course.find({ 'instructor.id': _id.toString() });
+        res.json(courses)
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({ message: error.message });
+    }
+}
+
 async function AddCourseVideo(req,resp)
 {
     try
@@ -82,4 +91,5 @@ async function AddCourseVideo(req,resp)
     
 }
 
-module.exports = { ListCourses, AddCourse, DisplayCourse, AddCourseVideo };
+module.exports = { ListCourses, AddCourse, DisplayCourse, AddCourseVideo , getUserCourses };
+
